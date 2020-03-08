@@ -2,6 +2,37 @@ body{
     padding: 100px;
 }
 
-.bank-title{
-    text-align: center;
+
+
+.submit-area{
+    margin-top: 50px;
+    padding: 40px;
+    border-radius: 10px;
+    box-shadow: 5px 5px 10px gray;
+}
+
+#trx-area{
+
+    display: none;
+    
+}
+
+.deposit{
+    background-color: slateblue;
+}
+
+.withdraw{
+    background-color: salmon;
+}
+
+.balance{
+    background-color: orange;
+}
+
+.margin-for-div{
+    margin: 0px 25px;
+    color: white;
+    padding: 25px;
+    border-radius: 10px;
+    box-shadow: 5px 5px 10px gray;
 }
