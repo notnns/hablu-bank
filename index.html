@@ -25,7 +25,6 @@
         </div>
     </div>
 
-
     <div id="trx-area" class="container">
         <br>
         <h3 class="text-center control-style">Account Control</h3>
@@ -34,28 +33,24 @@
             <div class="col-md-4 ">
                 <div class="margin-for-div deposit">
                     <h5>Deposit</h5>
-                    <h2>$ <span id="currentDeposit">00</span></h2>
+                    <h2>$ <span id="boardDeposit">00</span></h2>
                 </div>
-
             </div>
             <div class="col-md-4 ">
                 <div class="margin-for-div withdraw">
                     <h5>Withdraw</h5>
-                    <h2>$ 00</h2>
+                    <h2>$ <span id="boardWithdraw">00</span></h2>
                 </div>
-
             </div>
             <div class="col-md-4 ">
-
                 <div class="margin-for-div balance">
                     <h5>Balance</h5>
-                    <h2>$ <span id="currentAmount">1240</span></h2>
+                    <h2>$ <span id="boardBalance">1240</span></h2>
                 </div>
-
             </div>
         </div>
-
-        <br><br>
+        <br>
+        <br>
         <div class="row">
             <div class="col-md-6">
                 <div class="submit-area2">
@@ -68,21 +63,14 @@
             <div class="col-md-6">
                 <div class="submit-area2">
                     <h4>Withdraw</h4>
-                    <input type="text" placeholder="Amount you want to withdraw" class="form-control">
+                    <input type="text" id="withdrawAmount" placeholder="Amount you want to withdraw"
+                        class="form-control">
                     <br>
-                    <button class="btn-success btn">Withdraw</button>
+                    <button id="withdraw-money" class="btn btn-success">Withdraw</button>
                 </div>
             </div>
         </div>
-
     </div>
-
-
-
-
-
-
-
 
 
     <script>
@@ -98,27 +86,60 @@
 
 
         const addMoney = document.getElementById("add-money");
-        addMoney.addEventListener("click", function(){
-            const depositAmount = document.getElementById("depositAmount").value;
-            const depAmountNum = parseFloat(depositAmount);
-
-
-            updateBalance("currentDeposit" ,depAmountNum);
-            updateBalance("currentAmount" ,depAmountNum);
-
-            document.getElementById("depositAmount").value = "";
-
+        addMoney.addEventListener("click", function () {
+            depositMoneyAndUpdateTotalBalance();
         })
 
-        function updateBalance(id, depAmountNum){
-            const currentAmount = document.getElementById(id).innerText;
-            const currentAmountNum = parseFloat(currentAmount);
-            const totalAmount = currentAmountNum + depAmountNum;
-            document.getElementById(id).innerText = totalAmount;
+
+
+        const withdrawMoney = document.getElementById("withdraw-money");
+        withdrawMoney.addEventListener("click", function () {
+            withdrawMoneyAndUpdateBalance();
+        })
+
+
+
+        function depositMoneyAndUpdateTotalBalance() {
+            const depositAmountNum = parseFloat(document.getElementById("depositAmount").value);
+            if (depositAmountNum >= 0) {
+                const totalBalance = parseFloat(document.getElementById("boardBalance").innerText) + depositAmountNum;
+                const totalDeposit = parseFloat(document.getElementById("boardDeposit").innerText) + depositAmountNum;
+                document.getElementById("boardBalance").innerText = totalBalance;
+                document.getElementById("boardDeposit").innerText = totalDeposit;
+                document.getElementById("depositAmount").value = "0";
+            }
+            else {
+                document.getElementById("depositAmount").value = "Invalid Amount";
+            }
         }
 
-        
-    
+
+
+
+        function withdrawMoneyAndUpdateBalance() {
+            const withdrawAmountNum = parseFloat(document.getElementById("withdrawAmount").value);
+
+            if (withdrawAmountNum >= 0) {
+
+                const totalBalance = parseFloat(document.getElementById("boardBalance").innerText) - withdrawAmountNum;
+                const totalWithdraw = parseFloat(document.getElementById("boardWithdraw").innerText) + withdrawAmountNum;
+                if (totalBalance >= 0) {
+                    document.getElementById("boardWithdraw").innerText = totalWithdraw;
+                    document.getElementById("boardBalance").innerText = totalBalance;
+                    document.getElementById("withdrawAmount").value = "0";
+                }
+                else {
+                    document.getElementById("withdrawAmount").value = "Not Enough Balance";
+                }
+            }
+            else {
+                document.getElementById("withdrawAmount").value = "Invalid Amount";
+            }
+        }
+
+
+
+
 
     </script>
 
