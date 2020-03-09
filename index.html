@@ -14,7 +14,7 @@
 <body>
 
     <div class="container">
-        <h1 class="text-center">Welcome to Hablu Bank</h1>
+        <h1 class="text-center title-text-style">Welcome to <b>Hablu Bank</b></h1>
         <div id="login-area" class="submit-area">
             <h4>Login</h4>
             <input type="text" placeholder="Email" value="" class="form-control">
@@ -28,22 +28,22 @@
 
     <div id="trx-area" class="container">
         <br>
-        <h3 class="text-center">Account Control</h3>
+        <h3 class="text-center control-style">Account Control</h3>
         <br>
         <div class="row">
             <div class="col-md-4 ">
                 <div class="margin-for-div deposit">
                     <h5>Deposit</h5>
-                    <h2>$ 00</h2>
+                    <h2>$ <span id="currentDeposit">00</span></h2>
                 </div>
-                
+
             </div>
             <div class="col-md-4 ">
                 <div class="margin-for-div withdraw">
                     <h5>Withdraw</h5>
                     <h2>$ 00</h2>
                 </div>
-                
+
             </div>
             <div class="col-md-4 ">
 
@@ -51,30 +51,72 @@
                     <h5>Balance</h5>
                     <h2>$ 1240</h2>
                 </div>
-                
+
+            </div>
+        </div>
+
+        <br><br>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="submit-area2">
+                    <h4>Deposit</h4>
+                    <input id="depositAmount" type="text" placeholder="Amount you want to Deposit" class="form-control">
+                    <br>
+                    <button id="add-money" class="btn-success btn">Deposit</button>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="submit-area2">
+                    <h4>Withdraw</h4>
+                    <input type="text" placeholder="Amount you want to withdraw" class="form-control">
+                    <br>
+                    <button class="btn-success btn">Withdraw</button>
+                </div>
             </div>
         </div>
 
     </div>
-  
 
 
 
 
 
 
-<script>
-    const loginBtn = document.getElementById("login");
-    loginBtn.addEventListener("click", function(){
-        const loginArea = document.getElementById("login-area");
-        loginArea.style.display = "none";
 
-        const trxArea = document.getElementById("trx-area");
-        trxArea.style.display = "block";
 
-    });
 
-</script>
+    <script>
+        const loginBtn = document.getElementById("login");
+        loginBtn.addEventListener("click", function () {
+            const loginArea = document.getElementById("login-area");
+            loginArea.style.display = "none";
+
+            const trxArea = document.getElementById("trx-area");
+            trxArea.style.display = "block";
+
+        });
+
+
+        const addMoney = document.getElementById("add-money");
+        addMoney.addEventListener("click", function(){
+            console.log("deposit clicked");
+            const depositAmount = document.getElementById("depositAmount").value;
+            const depAmountNum = parseFloat(depositAmount);
+
+            const oldDeposit = document.getElementById("currentDeposit").innerText;
+            const oldDepositNum = parseFloat(oldDeposit);
+
+            const totalDeposit = depAmountNum + oldDepositNum;
+            console.log(totalDeposit);
+
+            document.getElementById("currentDeposit").innerText = totalDeposit;
+
+            document.getElementById("depositAmount").value = "";
+
+
+        })
+
+    </script>
 
 </body>
 

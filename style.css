@@ -34,5 +34,21 @@ body{
     color: white;
     padding: 25px;
     border-radius: 10px;
+    
+}
+
+.title-text-style{
+    color: royalblue;
+}
+
+.control-style{
+    color: seagreen;
+}
+
+
+.submit-area2{
+    margin: 50px 80px;
+    padding: 40px;
+    border-radius: 10px;
     box-shadow: 5px 5px 10px gray;
 }
