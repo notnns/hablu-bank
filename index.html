@@ -49,7 +49,7 @@
 
                 <div class="margin-for-div balance">
                     <h5>Balance</h5>
-                    <h2>$ 1240</h2>
+                    <h2>$ <span id="currentAmount">1240</span></h2>
                 </div>
 
             </div>
@@ -99,22 +99,26 @@
 
         const addMoney = document.getElementById("add-money");
         addMoney.addEventListener("click", function(){
-            console.log("deposit clicked");
             const depositAmount = document.getElementById("depositAmount").value;
             const depAmountNum = parseFloat(depositAmount);
 
-            const oldDeposit = document.getElementById("currentDeposit").innerText;
-            const oldDepositNum = parseFloat(oldDeposit);
 
-            const totalDeposit = depAmountNum + oldDepositNum;
-            console.log(totalDeposit);
-
-            document.getElementById("currentDeposit").innerText = totalDeposit;
+            updateBalance("currentDeposit" ,depAmountNum);
+            updateBalance("currentAmount" ,depAmountNum);
 
             document.getElementById("depositAmount").value = "";
 
-
         })
+
+        function updateBalance(id, depAmountNum){
+            const currentAmount = document.getElementById(id).innerText;
+            const currentAmountNum = parseFloat(currentAmount);
+            const totalAmount = currentAmountNum + depAmountNum;
+            document.getElementById(id).innerText = totalAmount;
+        }
+
+        
+    
 
     </script>
 
